@@ -1,6 +1,6 @@
 class CommentController < ApplicationController
   def create
-    @post = Post.find(params.fetch[:post_id])
+    @post = Post.find(params[:post_id])
     @comment = Comment.new(comment_params)
     @comment.post = @post
     if @comment.save
@@ -13,7 +13,6 @@ class CommentController < ApplicationController
     private
 
   def comment_params
-    params.fetch(:comment).permit('content')
+    params.require(:comment).permit(:content)
   end
 end
-
